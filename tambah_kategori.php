@@ -1,12 +1,18 @@
 <?php 
 include ("koneksi.php");
 
+session_start();
+if (!isset($_SESSION['login'])) {
+    header("Location: login.php");
+    exit;
+}
+
 if(isset($_POST['simpan'])) {
     $nama_kategori = $_POST['nama_kategori'];
 
     mysqli_query($koneksi, "INSERT INTO categories(nama_kategori) VALUES ('$nama_kategori')");
 
-    header("location:index.php");
+    echo "<script>alert('Success Menambahkan Data Kategori'); window.location='index.php?page=categories';</script>";
 }
 ?>
 

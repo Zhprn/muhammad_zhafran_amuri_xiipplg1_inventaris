@@ -1,6 +1,12 @@
 <?php
 include 'koneksi.php';
     
+session_start();
+if (!isset($_SESSION['login'])) {
+    header("Location: login.php");
+    exit;
+}
+
 if (isset($_POST['simpan'])) {
     $nama = $_POST['nama_barang'];
     $kategori = $_POST['id_categories'];
@@ -32,7 +38,7 @@ if (isset($_POST['simpan'])) {
         VALUES ('$kategori', '$nama', '$stok', '$harga', '$tanggal', '$gambar')"
     );
 
-    header("Location: index.php?page=items");
+    echo "<script>alert('Success Menambahkan Data Items'); window.location='index.php?page=items';</script>";
     exit;
 }
 

@@ -1,5 +1,12 @@
 <?php
 include 'koneksi.php';
+
+session_start();
+if (!isset($_SESSION['login'])) {
+    header("Location: login.php");
+    exit;
+}
+
 $id = $_GET['id'] ?? '';
 if ($id == '') {
     header("Location: index.php?page=items");
@@ -52,7 +59,7 @@ if (isset($_POST['update'])) {
         WHERE id_items='$id'"
     );
 
-    header("Location: index.php?page=items");
+    echo "<script>alert('Succes Update Data Barang'); window.location='index.php?page=items';</script>";
     exit;
 }
 ?>
