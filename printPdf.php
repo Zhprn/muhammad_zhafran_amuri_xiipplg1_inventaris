@@ -2,10 +2,6 @@
 require('fpdf/fpdf.php');
 include 'koneksi.php';
 session_start();
-if (!isset($_SESSION['login'])) {
-    header("Location: login.php");
-    exit;
-}
 
 $query = mysqli_query($koneksi,"
     SELECT items.*, categories.nama_kategori 
@@ -18,6 +14,7 @@ $pdf = new FPDF("L","mm","A4");
 $pdf->AddPage();
 
 $pdf->SetFont("Arial","B",16);
+$pdf->Cell(0,10,"Data Barang",0,1,"C");
 $pdf->Ln(5);
 
 $pdf->SetFont("Arial","B",10);
